@@ -1,38 +1,129 @@
-.App {
-  text-align: center;
+.cloudOne {
+  --i: 0
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cloudTwo {
+  --i: 1
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.cloudThree {
+  --i: 2
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cloudFour {
+  --i: 3
+}
+
+body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 100vh;
+  background: #eaeef0;
 }
 
-.App-link {
-  color: #61dafb;
+.loader {
+  position: relative;
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
+.loader span {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background: #eaeef0;
+  border-radius: 50%;
+  border: 6px solid #eaeef0;
+  box-shadow: -8px -8px 15px rgba(255, 255, 255, 1),
+              8px 8px 25px rgba(0, 0, 0, .15);
+  overflow: hidden;
+}
+
+.loader span::before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  inset: 0;
+  box-shadow: inset 10px 10px 20px rgba(0, 0, 0, .5);
+  inset: -5px -5px 15px rgba(255, 255, 255, 1);
+}
+
+.loader span::after {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  background: #eaeef0;
+  border: 3px solid #eaeef0;
+  border-radius: 50%;
+  box-shadow: -8px -8px 25px rgba(255, 255, 255, 1),
+              8px 8px 25px rgba(0, 0, 0, .25),
+              inset 3px 3px 10px rgba(0, 0, 0, .15),
+              inset -1px -1px 15px rgba(255, 255, 255, 1);
+}
+
+.loader span i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(5px);
+  background: linear-gradient(#42abff, #ff4f8b, #ffeb3b);
+  animation: animate 1s linear infinite;
+}
+
+@keyframes animate {
+  0% {
     transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+.rocket {
+  position: absolute;
+  inset: 50px;
+  z-index: 10;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.rocket .faRocket {
+  position: absolute;
+  color: #ff4f8b;
+  font-size: 3.5em;
+  animation: animateRocket 0.2s linear infinite;
+  stroke: black;
+  stroke-width: 12;
+}
+
+@keyframes animateRocket {
+  0%, 100% {
+    transform: translate(0px, 0px) rotate(-45deg);
+  }
+  50% {
+    transform: translate(0, 3px) rotate(-45deg)
+  }
+}
+
+.faCloud {
+  position: absolute;
+  top: calc(35px * var(--i));
+  left: calc(45px * var(--i));
+  font-size: 2em;
+  animation: animateClouds 1s linear infinite;
+  animation-delay: calc(-0.5s * var(--i));
+  stroke: black;
+  stroke-width: 20;
+}
+
+@keyframes animateClouds {
+  0% {
+    transform: translateY(calc(-35 * 5px));
+  }
+  100% {
+    transform: translateY(calc(35 * 5px));
   }
 }
